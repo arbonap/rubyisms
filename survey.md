@@ -81,7 +81,7 @@ ____________
 - Rails is a unique framework because of its DSL, or Domain Specific Language. The Rails DSL makes it very human-readable. Moreover, Rails can take advantage of large community of open source maintainers that (fairly) reliably maintain gems. Also, Rails takes advantage of Ruby as a language. Ruby is flexible, dynamic, has many handy methods, and lots of syntactic sugar that makes developing easier on the developer. Lastly, Rails is very opinionated. There is a so-called "Rails Way" of developing, and the framework pushes you to develop in that way.
 
 ## What is useful about Rails Console? Could you provide practical examples of using it for live websites?
-- Rails Console allows you to play around with and test your code. You're allowed to instantiate a particular test object, and play around with it to better understand its behaviors. For example, you can take advantage of `rails c` if you want to quickly hand-test if a model validation successfully went through after instantiating a particular object. If your object   
+- Rails Console allows you to play around with and test your code. You're allowed to instantiate a particular test object, and play around with it to better understand its behaviors. For example, you can take advantage of `rails c` if you want to quickly hand-test if a model validation successfully went through after instantiating a particular object. Moreover, you can play around with Rails methods with the Rails Console.
 
 ## Please give an overview of MVC? What is a common problem in writing MVC code in Rails? What is the remedy for it?
 
@@ -96,31 +96,40 @@ to a codebase, and facilitates maintainability and readability of an application
 
 
 ## What is the difference between hook methods and filters?
--
+- A hook method is like `include`, when you include instance methods, and `extend` when you want to include class methods.
+- A filter is a special Rails controller method. An example would be a `before_save` filter, which calls a method before it saves to the database.
 
 
 ## When do you use named scopes? What are the benefits?
--
+- I believe you use named scopes when you're using something like a state-machine game, and you can have your different states as different namespaces. For example, you can have an :admin namespace or a :user namespace. The benefit is that it organizes your logic better.
 
 ## What is so special about the Asset Pipeline?
--
+- The Asset Pipeline minifies/compresses JavaScript and CSS assets. It allows you to write these assets in other languages, like Coffeescript or SASS.
+- If you have Sprockets enabled, it caches assets in development and production.
+
 
 ## Any reason you would write your own Rails Helpers?
--
+- I would use a rails helper if I had some complicated view logic that I wanted to DRY up, take out of the view, and use the rails helper to help me write some more complicated HTML.
 
 
 ## What are the benefits of using migrations? If you screw up a migration that you have already committed to the source code repository (e.g. named a column badly or gave it the wrong data type), what do you do to fix it?
--
+- Migrations are how you change and update your schema.rb (or database tables) in a Rails app. A benefit to using migrations is that you do not have to directly write lots of raw SQL, and can use lots of Rails sugar to help you accomplish database changes.
+- To fix a messed up migration, you want to `rake db:rollback`. After rolling back, rewrite or correctly edit your migration file, and then after you're done, type `rake db:migrate` in the terminal in order to enact your schema changes.
+- Try checking your work by writing up RSpec tests that test the model you're working on. Also, may try to hand test your changes in `rails c`. Then commit your changes and push up to the master branch.
 
 
 ## What are some ways of optimizing the performance of slow web pages in a Rails application? Please mention 3 at least.
--
+- You can use different caching mechanisms.
+1. You can utilize the `fresh_when?` method, which checks an assets' etag. If the etag hasn't changed, the view will cache and have a `304` status.
+2. You can replace slower n + 1 queries written in Ruby/Active Record with more efficient raw SQL queries
+3. You can use Russian Doll caching. This is when you use a key-based cache expiration. Whenever the ‘inner’ cache expires, we also want the outer cache to expire. But if the outer cache expires, don't expire the inner cache.
 
 ## Rails 4 replaced attr_accessible with a new alternative. What is it and why was that done?
 - `attr_accessible` allows developers to whitelist attributes and allow them to be updated in bulk in the model. This was replaced with strong parameters. Now protecting attributes is done in the controller, where it belongs, instead of the model. This was done for security purposes, and also to better follow 'the Rails Way', which values skinny models.
 
 ## Why would you place a gem in the :asset group in Gemfile? Why would you place a gem in the :development group? Please explain.
--
+- I am not familiar with the :asset part of a Gemfile. I started learning Rails with Rails 4.
+- You put gems in the `:development` part of a Gemfile if it's a gem that you only use in a development environment. For example, gems used for testing code are put in `:development`.
 
 
 ## Have you used Rails Observers before? If so, what was the reason? What are they useful for?
@@ -138,4 +147,46 @@ to a codebase, and facilitates maintainability and readability of an application
 
 
 ## What approach do you follow in Rails in order to build interactive webpages relying on Ajax?
--
+- I would try to use a frontend framework, such as React, to organize my frontend code. I'd try to follow the common setup of organizing React code with components, containers, actions, and reducers.
+
+## How does Git differ from SVN, CVS, and Visual SourceSafe?
+- Git differs from other systems of version controls because it calculates the deltas, or the change, between different code. Other
+
+
+## Please provide examples for when the "git stash" command is useful.
+- Say you're in the middle of completing a messy feature, and want to work on something else. You want to stash your changes if you are in the middle of a story, and need to move to a different branch. You stash your dirty changes. Git keeps them on a stack, which you can then pop at a later time.
+
+## What is the difference between "git commit" and "git push"?
+- A git commit is like a snapshot. It is like a save-point of the state of your code. Ideally, you commit your code when you're in a logical stopping point, and your code isn't broken.
+- Ideally, a git push is when you push up your code to Github when you've finished a feature. Your code is then on Github, or the cloud. It's not just on your local machine now, but also in a repository where other developers can pull it down and build further upon your code.
+
+## Have you ever used the Git Rebase functionality? If so, why and how does it compare to the Git Merge functionality?
+- Yes, I have used interactive rebases to squash my commits in my Open Source work. I have worked on Open Source projects in the past where the developers reviewing my PR's wouldn't accept my working-code without squashing my commits into a cohesive commit-story. Rebasing in git re-writes history. It provides a linear story. Merging does not leave a linear story. Merging leaves an extra merge commit, which many Open Source developers are not happy with in my personal experience. Moreover, merging gives you two sets of commits that are the same changes.
+
+## Mention 2 practical uses of Git branches.
+1. You can create a branch if you want to play with experimental code in an environment that will not introduce breaking changes into master.
+2. Branches are a way f or developers to parallelize work. A team of software developers can take advantage of branches to work on different features at the same time.
+
+## What is the difference between "git pull" and "git fetch"?
+- A `git pull` is both a `git fetch` and afterwards a `git merge` in one.
+- A `git fetch` updates your remote tracking branches.
+## What are some practical uses for the "git cherry-pick" command?
+- A `git cherry-pick` is a good way to take a commit from a feature branch and rebase it on top of master.
+
+## Do you have a favorite release branching strategy with Git? If so, please explain in detail.
+This is my usual workflow:
+1. git pull --rebase master
+2.
+
+## Please explain GitHub's Fork functionality
+- A fork is when a developer makes an individual copy of a codebase on Github that is linked to their personal Github account.
+
+## What is a GitHub Pull Request and what is it useful for?
+
+## What are they ways of contributing to an open-source project on GitHub using Git?
+
+## What are the commands needed to share your local code changes with the team?
+
+## Suppose you made a few code changes that you no longer want. How do you reset them to the last version stored in Git?
+- It depends. If you've already committed and pushed this commit up to master, you can go to the master branch and do `git revert <shah here>`. Git reverts undoes a commit by doing a new commit and then tacking the new commit onto the existing project.
+- You could also do `git reset HEAD~<number of commits you want to go back> --soft`. The `--soft` flag keeps the staged changes. The `--hard` flag wipes staged changes away-- be very careful with this option.
