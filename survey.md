@@ -150,7 +150,7 @@ to a codebase, and facilitates maintainability and readability of an application
 - I would try to use a frontend framework, such as React, to organize my frontend code. I'd try to follow the common setup of organizing React code with components, containers, actions, and reducers.
 
 ## How does Git differ from SVN, CVS, and Visual SourceSafe?
-- Git differs from other systems of version controls because it calculates the deltas, or the change, between different code. Other
+- Git differs from other systems of version controls because it calculates the deltas, or the change, between different code. Git takes snapshots of code, rather than storing all versions of code. Other version control systems such as SVN store all versions of code on a sever, and then developers have a local copy of the files on their computer. Older versions of version control systems do not allow more than one developer to checkout or use a particular file at a time, creating bottlenecks.
 
 
 ## Please provide examples for when the "git stash" command is useful.
@@ -174,18 +174,30 @@ to a codebase, and facilitates maintainability and readability of an application
 - A `git cherry-pick` is a good way to take a commit from a feature branch and rebase it on top of master.
 
 ## Do you have a favorite release branching strategy with Git? If so, please explain in detail.
-This is my usual workflow:
-1. git pull --rebase master
-2.
+- To delete a branch on my local filesystem, I do `git branch -d <name of my branch>`
+- To delete the branch from my terminal on Github, I do `git branch origin :[name of my branch]`
 
 ## Please explain GitHub's Fork functionality
 - A fork is when a developer makes an individual copy of a codebase on Github that is linked to their personal Github account.
 
 ## What is a GitHub Pull Request and what is it useful for?
+- Pull requests let other developers know about the changes you've made to a shared Github repository.
+- Pull requests are very useful for other developers to do Code Reviews. Developers interested in your code can review the change, or discuss any future modifications. You can even ask for code review via Github now.
+
 
 ## What are they ways of contributing to an open-source project on GitHub using Git?
+- If you are given rights to the particular repository, instead of forking, you can bypass forking the repository and just create a branch directly off of the repository in question. You can then create a Pull Request from your branch.
+- You can fork the repository, and then create a pull request from your personal repository. You can then create a Pull request from your forked repo.
 
 ## What are the commands needed to share your local code changes with the team?
+I prefer rebasing. This is my usual workflow:
+1. On the master branch, I do `git pull --rebase` to get latest changes
+2. git checkout -b `new branch name`
+2. Write tests. Build features on said branch
+3. Make sure tests pass.
+4. `git rebase master` to get latest master changes, especially if you've been working on a particular branch for a while.
+5. `git push origin some-branch -f`
+I usually get a pull request at this point, and then rebase into master after approval via Github.
 
 ## Suppose you made a few code changes that you no longer want. How do you reset them to the last version stored in Git?
 - It depends. If you've already committed and pushed this commit up to master, you can go to the master branch and do `git revert <shah here>`. Git reverts undoes a commit by doing a new commit and then tacking the new commit onto the existing project.
