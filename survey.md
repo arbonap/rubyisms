@@ -202,3 +202,101 @@ I usually get a pull request at this point, and then rebase into master after ap
 ## Suppose you made a few code changes that you no longer want. How do you reset them to the last version stored in Git?
 - It depends. If you've already committed and pushed this commit up to master, you can go to the master branch and do `git revert <shah here>`. Git reverts undoes a commit by doing a new commit and then tacking the new commit onto the existing project.
 - You could also do `git reset HEAD~<number of commits you want to go back> --soft`. The `--soft` flag keeps the staged changes. The `--hard` flag wipes staged changes away-- be very careful with this option.
+
+
+## What are the benefits of writing semantic HTML and CSS? Could you provide an example of semantic use of them and another example of non-semantic use of HTML and CSS?
+- Using semantic HTML reinforces the meaning of information in webpages and web apps. Using semantic markup is an accessibility issue. You should use semantic HTML and CSS so screen-readers are able to more easily parse your code. It's best practice to use semantic HTML/CSS so your site better meets accessibility needs.
+- Semantic HTML examples: using "<header></header>" for a site header, using "<footer></footer>" for a site's footer, and using "<h1></h1>" only for the highest level heading.
+- Non-semantic use of HTML: Using something like "<div class="header"></div>" instead of using the header tag ("<header></header>"). Another example would be using a link tag for a button, when you really should use a button tag.
+
+## What is the main difference between a div and a span? What are they useful for? Examples?
+- A span is inline and meant for small chunks of HTML. Spans can be useful for emphasizing text within a div.
+- A div is block-line and usually meant for larger chunks of HTML. Divs should be used to wrap sections of a document.
+
+## What is the difference between liquid/fluid layouts and fixed layouts? What are the pros and cons in each? Please provide links to websites that have a liquid/fluid layout and others that have a fixed layout, 2 links each.
+- Responsive sites: https://designmodo.com/hotel-travel-websites/, https://www.omadahealth.com/
+- Unresponsive sites: https://www.warnerbros.com/archive/spacejam/movie/jam.htm, http://www.dolekemp96.org/main.htm
+
+## What is the difference between margin and padding?
+- Margin is within the div
+- Padding is outside the div
+
+## Say, you have two consecutive P elements on top of each other with a margin-top of 20px and margin-bottom of 10px. What will be the vertical distance between them in pixels once rendered in the web browser?
+- 30px
+
+## Please mention 2 ways of laying out product boxes with text-writing flow (left to right, and top to bottom) where each box contains the product image with a description below the image and a price below the description. 5 of them max fit horizontally, but if the user shrinks the browser window width, they flow downward fitting 4 or less horizontally, down to 1 minimum when the browser has very small width. You may provide both HTML markup and CSS stylesheet code.
+
+## What is the difference between "display: inline;", "display: inline-block;", and "display: block;"? Please name some common elements that have "display: inline;" by default, the elements that have "display: inline-block" by default, and the elements that have "display: block;" by default.
+- An element with "display: inline;" can't have a width or height, or vertical margin. It is used to display something in a sentence. Some common elements that have "display: inline" are "<em></em>"", emphasized text and "<i></i>"," italicized text.
+- An element with "display: block;" can have width, height, and margin. Also forces a line break after the block element. A common element that has "display: block" by default are <p></p> paragraphs.
+- If you want to resize an inline element and give it width, height and or margin, give it "display: inline-block;". Does not force a line break-- this allows other elements to sit to their left and right.
+
+## What are the practical benefits of using Twitter Boostrap? Would you provide some examples? Please mention 3 examples where Twitter Bootstrap is immensely useful compared to not using it.
+Practical benefits of using Twitter Bootstrap:
+- If you have to build quickly, Bootstrap helps you quickly get started
+- Responsiveness
+- Large community support, and well-maintained
+- Customizable
+Drawbacks to using Twitter Bootstrap:
+- Out of the box, Bootstrap is bulky and heavy and could potentially significantly add to load time
+- It doesn't follow best practices in terms of semantic markup; you can be left with DOM elements packed with very long class names
+- Makes scalability and maintenence more challenging
+- Due to its popularity, your web application may not look unique
+
+## How do you build a liquid/fluid layout with Twitter Bootstrap?
+- Add media queries accordingly based on the screen size of the user's device
+- Utilize Bootstrap's 12 column grid system when executing media queries
+
+## Can you use any fonts that the web browser does not support by default? Please explain.
+- Yes. You're able to include fonts via third-party API's like the GoogleFonts API. Or, you can include fonts not supported by default in your Rails app in app/assets/fonts directory.
+
+## What does CSS stand for Cascading StyleSheets? Why the use of the word "Cascading"? Any practical benefits to it? Please provide examples.
+- More than one  rule could apply to a particular piece of HTML. Because of this, there is a cascade algorithm that defines how exactly CSS rules apply, and which ones take precedence when rules collide.
+The cascade is implemented by importance, specificity, and then order.
+
+## How do you render a square image as circular using HTML and CSS?
+- Increase the border-radius to 100%
+
+## Please provide a practical example of using CSS3 Transitions and/or Animations.
+- You can use a CSS3 fade-in transition on page-load.
+
+## What is the benefit of using CSS3 Transitions/Animations over JavaScript animations?
+- CSS3 transitions can have better run-time than JQuery animations, which can help with improving rendering and page load times. For example, adding many rendering/animation Javascript libraries can add to an app's load time.
+## What is the benefit of namespacing JavaScript code and what is one way of doing it?
+- 
+
+## Could you explain JavaScript's prototype-based Inheritance?
+
+## Everything is an Object in JavaScript. True or false? Please explain.
+-False. Unlike Ruby, not everything is an Object in JavaScript. In JavaScript, an Object is like a hashmap. JavaScript also has primitives, which are things like strings, numbers, and booleans.
+
+## What is CoffeeScript and what does it offer over JavaScript?
+- CoffeeScript compiles to vanilla JavaScript. There's no interpretation at runtime. CoffeeScript became popular with many developers because of the syntactic sugar it brings. CoffeeScript is very ruby-ish and python-like with its flavor of syntax. It has significant white-space like Python. Because of this, CoffeeScript was very popular, especially with traditionally backend Rails developers because people found it more familiar syntax than vanilla JavaScript.
+
+## Suppose you have a list of radio buttons contained in a div and upon selecting a radio button you want to have the selected radio button display a bolder font, have underlined text, and have a lightgray background color. What code would you write to accomplish this in HTML/CSS/JavaScript (It is OK if you only write HTML and JavaScript or only HTML and CSS to solve this. It is also OK to utilize all 3 languages. )
+
+## Can you ever think of a use case for negative padding or margin?
+
+## What is Ajax? Please provide examples of using it on a web page.
+
+## What is the difference between document and window?
+
+## What is the recommended strategy for loading JavaScript on a webpage?
+
+## Agile has been used to mean a lot of things. What do you think Agile truly means?
+
+## What is the difference between traditional project management (sometimes associated with the Waterfall process) and Agile iterative development? Could you define what Scrum calls a Sprint and XP calls an Iteration?
+
+## Any experience with Agile estimation or planning poker? If so, please explain.
+
+## Please define "Team Velocity" and how it is calculated.
+
+## Could you talk a little bit about the XP idea of Collective Ownership?
+
+## Do you have any experience with pair-programming? If so, could you list all the way it helps a team produce higher quality code faster?
+
+## Please define Test Driven Development and explain why it is sometimes called Test Driven Design.
+
+## Are you familiar with XP's term "Spike"? What is it and why is it needed?
+
+## What does YAGNI stand for and why is it important in Agile software development?
