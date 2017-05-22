@@ -205,7 +205,7 @@ I usually get a pull request at this point, and then rebase into master after ap
 
 
 ## What are the benefits of writing semantic HTML and CSS? Could you provide an example of semantic use of them and another example of non-semantic use of HTML and CSS?
-- Using semantic HTML reinforces the meaning of information in webpages and web apps. Using semantic markup is an accessibility issue. You should use semantic HTML and CSS so screen-readers are able to more easily parse your code. It's best practice to use semantic HTML/CSS so your site better meets accessibility needs.
+- Using semantic HTML reinforces the meaning of information in webpages and web apps. Using semantic HTML5 also makes tags briefer, and clearer. Using semantic markup is an accessibility issue. You should use semantic HTML and CSS so screen-readers are able to more easily parse your code. It's best practice to use semantic HTML/CSS so your site better meets accessibility needs.
 - Semantic HTML examples: using "<header></header>" for a site header, using "<footer></footer>" for a site's footer, and using "<h1></h1>" only for the highest level heading.
 - Non-semantic use of HTML: Using something like "<div class="header"></div>" instead of using the header tag ("<header></header>"). Another example would be using a link tag for a button, when you really should use a button tag.
 
@@ -226,6 +226,72 @@ I usually get a pull request at this point, and then rebase into master after ap
 
 ## Please mention 2 ways of laying out product boxes with text-writing flow (left to right, and top to bottom) where each box contains the product image with a description below the image and a price below the description. 5 of them max fit horizontally, but if the user shrinks the browser window width, they flow downward fitting 4 or less horizontally, down to 1 minimum when the browser has very small width. You may provide both HTML markup and CSS stylesheet code.
 
+- HTML:
+```
+<div id="container">
+  <div class="row">
+  	<div class="col one">
+      <p>I love Selena Quintanilla! She is an amazing pop star. </p>
+		</div>
+		<div class="col two">
+      <p>I love Selena Quintanilla! She is an amazing pop star. </p>
+		</div>
+    <div class="col three">
+      <p>I love Selena Quintanilla! She is an amazing pop star. </p>
+    </div>
+    <div class="col four">
+      <p>I love Selena Quintanilla! She is an amazing pop star. </p>
+    </div>
+    <div class="col five">
+      <p>I love Selena Quintanilla! She is an amazing pop star. </p>
+    </div>
+  </div>
+</div>
+```
+
+```
+.col{
+    color:#fff;
+		float:left;
+		margin:2%;
+		width: 15%;
+}
+.one{
+  background-color: red;
+}
+
+.two{
+  background-color: green;
+}
+
+.three{
+  background-color: #ff69b4;
+}
+
+.four{
+  background-color: purple;
+}
+.five{
+  background-color: blue;
+}
+@media screen and (max-width: 850px) {
+  .col{
+    float: left;
+    width: 20%;
+    color:#fff;
+    margin: 2%;
+
+  }
+}
+
+	@media screen and (max-width: 600px) {
+		.col{
+			float: none;
+			margin:0;
+			width: 100%;
+		}
+	}
+```
 ## What is the difference between "display: inline;", "display: inline-block;", and "display: block;"? Please name some common elements that have "display: inline;" by default, the elements that have "display: inline-block" by default, and the elements that have "display: block;" by default.
 - An element with "display: inline;" can't have a width or height, or vertical margin. It is used to display something in a sentence. Some common elements that have "display: inline" are "<em></em>"", emphasized text and "<i></i>"," italicized text.
 - An element with "display: block;" can have width, height, and margin. Also forces a line break after the block element. A common element that has "display: block" by default are <p></p> paragraphs.
@@ -262,41 +328,154 @@ The cascade is implemented by importance, specificity, and then order.
 
 ## What is the benefit of using CSS3 Transitions/Animations over JavaScript animations?
 - CSS3 transitions can have better run-time than JQuery animations, which can help with improving rendering and page load times. For example, adding many rendering/animation Javascript libraries can add to an app's load time.
+
 ## What is the benefit of namespacing JavaScript code and what is one way of doing it?
-- 
+- You namespace code to avoid collisions with other variables or objects in the global namespace. It's a way to safeguard code from breaking if another piece of code uses the same variable or method name.
+- One way of namespacing in JavaScript is using Object literal notation.
 
 ## Could you explain JavaScript's prototype-based Inheritance?
+- A prototype is a working object instance. Objects inherit directly from other objects. Unlike with class inheritance in languages like Ruby, in JavaScript, class taxonomies are not an automatic given of prototypal object orientation.
 
 ## Everything is an Object in JavaScript. True or false? Please explain.
--False. Unlike Ruby, not everything is an Object in JavaScript. In JavaScript, an Object is like a hashmap. JavaScript also has primitives, which are things like strings, numbers, and booleans.
+- False. Unlike Ruby, not everything is an Object in JavaScript. In JavaScript, an Object is like a hashmap. JavaScript also has primitives, which are things like strings, numbers, and booleans.
 
 ## What is CoffeeScript and what does it offer over JavaScript?
 - CoffeeScript compiles to vanilla JavaScript. There's no interpretation at runtime. CoffeeScript became popular with many developers because of the syntactic sugar it brings. CoffeeScript is very ruby-ish and python-like with its flavor of syntax. It has significant white-space like Python. Because of this, CoffeeScript was very popular, especially with traditionally backend Rails developers because people found it more familiar syntax than vanilla JavaScript.
 
 ## Suppose you have a list of radio buttons contained in a div and upon selecting a radio button you want to have the selected radio button display a bolder font, have underlined text, and have a lightgray background color. What code would you write to accomplish this in HTML/CSS/JavaScript (It is OK if you only write HTML and JavaScript or only HTML and CSS to solve this. It is also OK to utilize all 3 languages. )
 
+- HTML:
+```
+<div class="radioPanel">
+ <label>First choice </label>
+ <input type="radio" />
+ <label>Second choice </label><input type="radio" />
+<label>Last choice </label><input type="radio" />                  
+</div>
+```
+- CSS:
+```
+.radioPanel {
+    margin-left:20px;
+    margin-right: 20px;
+    padding-left:20px;
+    padding-right: 20px;
+    width: 500px;
+    color:black;
+    ```
+- JavaScript:
+```
+$(function() {
+    $('.radioPanel input[type="radio"]').change(function() {
+        $('.radioPanel label').css('background-color', 'transparent');
+        $('.radioPanel label').css('font-weight', 'normal');
+        $('.radioPanel label').css('text-decoration', 'none');
+        if ($(this).is(':checked'))
+               $(this).prev('label').css('background-color', 'gray');
+               $(this).prev('label').css('font-weight', 'bold');
+               $(this).prev('label').css('text-decoration', 'underline');
+      });
+});
+```
 ## Can you ever think of a use case for negative padding or margin?
+- If you want to give an image a rollover with borders, you could use negative margin to accomplish this so the border size doesn't shift the layout on a rollover
 
 ## What is Ajax? Please provide examples of using it on a web page.
-
+- Asynchronous JavaScript and XML. Instead of XML, though, nowadays we send over JSON. Basically, Ajax is a client-side protocol that is used client-side to communicate server-side without a need for a hard refresh. It helps avoid unnecessary entire page refreshes.
 ## What is the difference between document and window?
-
+- Window is the browser window that holds the current browsing context, and document is the HTML page inside of it that represents the DOM.
 ## What is the recommended strategy for loading JavaScript on a webpage?
+- You should load in your JavaScript last, so the webpage can load visibly before executing JS. I'd also attach libraries like jQuery with an on ready handler, so it can execute after the DOM loads.
+
+## Suppose there is an HTML UL list of menu items, how do you make it display them horizontally?
+- I would give the UL list of menu items "ul {display: inline;}"
+
+## What is a CSS selector?
+- A CSS selector is how you actually select the content you want to style.
+
+## What is the significance of the $ operator in jQuery? Please name three different uses for it.
+- It is the jQuery way to select/find HTML elements. You can use this syntax to find elements by ID or Class. You can also use this syntax to pass it a function to run when the document is ready. It's similar to "body.onload()". You're also able to pass it a string of HTML to turn this into a DOM element.
+
+## What is a CSS selector?
+- A CSS selector is how you actually select the content you want to style.
+
+## What is the difference between a CSS class and an ID? What are some practical uses for each?
+- Classes are not unique. ID's are supposed to be unique. Classes are denoted by a ".", while ID's are denoted by "#".
+- ID's are used when wanting to apply unique stylings
+- A class is utilized when you want to apply the same stylings to a family of elements
+
+## What text color will the following list element have? HTML: <li class="product_feature" id="product_feature_1"> Heated Leather Seats </li> and CSS: ul li { color: red; } #product_feature_1 { color: black; } .product_feature { color: blue; } body #product_feature_1 { color: yellow; } #product_feature_1.product_feature { color: purple; }
+- purple
+
+
+
+## Please provide examples of when inlined, internal and external stylesheet linking is beneficial in an HTML document.
+- Inline CSS can be useful for testing and quickly experimenting. It's also useful for smaller websites. It has the added benefit of lower HTTP requests.
+- With internal CSS, styles don't need to be applied to every single element.
+- The advantages of external stylesheet is faster load time and reduced file-size.
+
+## What does DOM stand for? Why is it useful to know about it when writing jQuery JavaScript code? Please provide an example.
+- Document Object Model. It's used whenever you interact with elements of a web page.
+- Browsers build an internal representation of the page with the "body" element at the top of the hierarchy and has child nodes below it. The DOM is the model underneath that gives developers access to the API that allows us to manipulate and navigate the Document.
+
+
+
+## Please explain when you would augment an application with a framework such as Angular.js, Ember.js, Batman.js, or Knockout.js. What are the use cases and problems they help with? Please provide a practical example of a web application that benefits from one of the frameworks mentioned.
+- You would use a frontend framework in order to give developers easier to remember, and more intuitive API.
+- Frontend frameworks are usually opinionated, and through their opinionated methodology, usually incorporate some sort of cohesive structure to your frontend code.
+- I know many Rails developers feel more comfortable with Ember, because the two frameworks have many similarities. For example Rails models and Ember models are very similar. The ember-cli is similar to the CLI provided by Rails. Debugging in Ember is similar to debugging in Rails.
+- Ember also helps with avoiding hard page reloads. Ember keeps a long-running state.
+## What are some of the new elements that HTML 5 adds? What are their benefits?
+- Semantic HTML was introduced. Div tags themselves are meaningless. Newer HTML5 tags such as the article tag, or the figure tag give semantic meaning to HTML. This helps improve readability and better communicates to other developers the goal a particular part of HTML is trying to accomplish. It enhances the intention of code. Moreover, it helps make tags more brief, and simpler.
+
 
 ## Agile has been used to mean a lot of things. What do you think Agile truly means?
+- In my mind, I believe agile emphasizes iterating quickly, being flexible enough to change directions relatively quickly, and emphasizing only shipping necessary features rather than planning meticulously upfront for features that your users aren't going to use.
 
 ## What is the difference between traditional project management (sometimes associated with the Waterfall process) and Agile iterative development? Could you define what Scrum calls a Sprint and XP calls an Iteration?
+- Waterfall emphasizes meticulous longterm planning into the future. The planning period for a waterfall process is very long, and many times comes from the top of the organization. To contrast, agile iterative development takes into account that focuses on Many times sprints are two weeks long. This is where engineers focus on implementing a part of a feature.
 
 ## Any experience with Agile estimation or planning poker? If so, please explain.
-
+- Yes, I have pointed stories during IPM. The more points a story has, the more complicated and longer said story will take. The less points a story is, the simpler and shorter amount of time it will take. Some teams break down larger pointed stories into smaller stories.
 ## Please define "Team Velocity" and how it is calculated.
 
+- Team Velocity is the rate at which a team ships code. Velocity is calculated based on the number of points completed each week, divided by the number of developers a team has.
+
 ## Could you talk a little bit about the XP idea of Collective Ownership?
+- I am not familiar with the XP idea of Collective Ownership.
 
 ## Do you have any experience with pair-programming? If so, could you list all the way it helps a team produce higher quality code faster?
+- Yes, I have experience pair-programming. Pairing allows two brains to work on the same problem, allowing faster breakthroughs when developing. This also allows developers to debug more quickly. Moreover, with pair programming, information silos are avoided because developers are periodically on-boarding other developers about the code they have written. Lastly, I believe pair programming helps developers stay more focused.
 
 ## Please define Test Driven Development and explain why it is sometimes called Test Driven Design.
+- TDD is a methodology when you write tests before you write your actual code. This is so to never ship untested code. According to some developers, if your code is untested, it may as well be as good as broken. Under TDD, you follow the Red-Green-Refactor method. First, you write your tests. Run the test suite, and watch your code fail. Make your tests pass. Then refactor.
 
 ## Are you familiar with XP's term "Spike"? What is it and why is it needed?
+- I am not familiar with XP's term 'spike'.
 
 ## What does YAGNI stand for and why is it important in Agile software development?
+- YAGNI stands for "you aren't going to need it". It's a phrase that basically rejects the idea of Waterfall planning. It's the idea that a feature you planned for in a waterfall planning process, it turns out to be unnecessary or unpopular after more user research. It's an acronym thats a proponent of the agile, iterative approach that only plans for what is most necessary.
+
+## Could you explain the difference between unit tests and integration tests? What are some ways of writing each type in a Rails application?
+
+- An example of a unit test would be like an RSpec test that tests a model. An integration test would be like a Selenium/Capybara test, that possibly opens up the browser and clicks through a page of the app and inputs mock data. Unit tests test a small building-block of code, usually a "behind-the-scenes" part of the code. Integration tests test many moving parts, and make sure they cohesively work together.
+
+## Please define "Refactoring", explain benefits, and talk about when it is possible and when it is too risky or not possible.
+
+- Refactoring means to dry up messy, repeatable code. Hopefully, when a developer refactors, the code becomes clearer to others and re-usable in other parts of the codebase. It may be too risky to refactor code if DRYing code up too much then becomes hard to understand for others. Developers must find a balance between DRY code and readability.
+
+## Agile is often confused with "zero documentation". What is your understanding about the matter?
+- Sometimes, agile teams move too quickly and change directions very quickly. To some developers, it may not be worth it to write down documentation for other developers about a certain part of the codebase, if that part of the codebase may be completely re-written or deleted based on the future direction of the team.
+
+## Agile is often confused with "no design up front". What is your understanding about the matter?
+- "No design up front" is a misunderstanding of agile. It's the idea that up-front design work is bad, and that instead you should change your design one test-case at a time.
+
+## While writing automated tests, when do you need to use Mock objects? When do you need to use Factories? What are the trade-offs?
+- Factories are good when you're dealing with the thing you're actually testing. Mocks are for when you need to interact with an API, but that thing itself has been tested elsewhere. Factories are more tied to ActiveRecord models, or in other words, a thing that can be persisted to your database. They let you use the entire interface directly, whereas mocks are way more limited - you have to specify everything explicitly yourself. But, using mocks doesn't slow down your test as much as having many factories may.
+- Also, unless you have a verified double as your mock, there's no guarantee that your mock is keeping up with changes in your codebase. So if you use unverified mocks, your tests start drifting.
+
+## What are the benefits of having daily scrums/stand-up-meetings ? How long should they be?
+
+The benefits of having daily scrum is that you're aware of what the rest of your team is working on. It lis a forum for people checking-in with one another.
+
+I believe stand-up should be less than 10 minutes long. It's purpose is to let people quickly check in about their progress, alert the team what they're working on currently, and to see if anyone is stuck or needs help.
